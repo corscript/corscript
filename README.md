@@ -1,2 +1,2 @@
-# corscript
- Python-based programming language
+# Corscript
+Corscript is a programming language written in Python
