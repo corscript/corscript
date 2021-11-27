@@ -14,7 +14,7 @@ except FileNotFoundError:
 
 for line in file.read().splitlines():
     if line:
-        command, arg = line.split()
+        command, arg = line.split(" ")
         if command in commands:
             corutil.RunCommand(command, arg) # run specified command
         else:
