@@ -1,5 +1,5 @@
 import sys # Used for arguments
-
+import corutil # Used for utilities
 commands = ["print", "var"] # Command list
 
 try:
@@ -16,6 +16,6 @@ for line in file.read().splitlines():
     if line:
         command, arg = line.split()
         if command in commands:
-            pass
+            corutil.RunCommand(command, arg) # run specified command
         else:
             print(f"Error: command {command} does not exist. Did you type it correctly?")
