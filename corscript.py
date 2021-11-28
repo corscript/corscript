@@ -1,12 +1,15 @@
-import sys # Used for arguments
-import corutil # Used for utilities
-commands = ["print", "var"] # Command list
+import sys  # Used for arguments
+import corutil  # Used for utilities
+commands = ["print"]  # Command list
+
 
 try:
-    filein = sys.argv[1] # Find filename
+    filein = sys.argv[1]  # Find filename
 except IndexError:
-    print("Usage: corscript file.cor") # No arguments
-    exit(1)
+    print("Corscript version 0.0.1 Shell")
+    while True:
+        command, arg = input("corscript>").split(" ")
+        corutil.check_and_run_command(commands, command, arg)
 try:
     file = open(filein, "r")
 except FileNotFoundError:
@@ -15,7 +18,4 @@ except FileNotFoundError:
 for line in file.read().splitlines():
     if line:
         command, arg = line.split(" ")
-        if command in commands:
-            corutil.RunCommand(command, arg) # run specified command
-        else:
-            print(f"Error: command {command} does not exist. Did you type it correctly?")
+        corutil.check_and_run_command(commands, command, arg)
