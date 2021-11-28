@@ -10,6 +10,7 @@ except IndexError:
     while True:
         command, arg = input("corscript>").split(" ")
         corutil.check_and_run_command(commands, command, arg)
+    exit()
 try:
     file = open(filein, "r")
 except FileNotFoundError:
