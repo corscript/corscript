@@ -1,6 +1,7 @@
 import sys  # Used for arguments
 import corutil  # Used for utilities
 commands = ["print"]  # Command list
+vars = {} # Variable list
 
 
 try:
@@ -9,7 +10,7 @@ except IndexError:
     print("Corscript version 0.0.1 Shell")
     while True:
         command, arg = input("corscript>").split(" ")
-        corutil.check_and_run_command(commands, command, arg)
+        corutil.check_and_run_command(commands, command, arg, vars)
     exit()
 try:
     file = open(filein, "r")
