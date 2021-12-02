@@ -1,17 +1,18 @@
 import sys  # Used for arguments
 import corutil  # Used for utilities
-commands = ["print"]  # Command list
+commands = ["print", "var", "printv", "setvar"]  # Command list
 vars = {} # Variable list
-
+args = []
 
 try:
     filein = sys.argv[1]  # Find filename
 except IndexError:
     print("Corscript version 0.0.1 Shell")
     while True:
-        command, arg = input("corscript>").split(" ")
-        corutil.check_and_run_command(commands, command, arg, vars)
-    exit()
+        args = input("corscript>").split(" ") # get shell input
+        command = args.pop(0) # find command
+        corutil.check_and_run_command(commands, command, args, vars) # check and run command
+
 try:
     file = open(filein, "r")
 except FileNotFoundError:
@@ -19,5 +20,5 @@ except FileNotFoundError:
 
 for line in file.read().splitlines():
     if line:
-        command, arg = line.split(" ")
-        corutil.check_and_run_command(commands, command, arg)
+        command, args = line.split(" ")
+        corutil.check_and_run_command(commands, command, args, vars)
