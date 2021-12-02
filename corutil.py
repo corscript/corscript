@@ -10,6 +10,8 @@ def RunCommand(command, args, vars):
         print(vars[args[0]]) # Print variable arg1
     elif command == "setvar":
         vars[args[0]]= args[1] # Set variable arg1 to arg2
+    elif command == "getin":
+        vars[args[0]]= input(args[1]) # get input from user
 def check_and_run_command(commands, command, args, vars):
     '''
     Checks command and runs it
