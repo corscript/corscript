@@ -33,4 +33,4 @@ def RunCommand(command, args, vars, commands):
     elif command == "getin":
         vars[args[0]]= input(args[1]) # get input from user
     elif command == "load":
-        open_file(commands, vars, "~/.corscript/libs" + args[0] + ".cor")
+        open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor")
