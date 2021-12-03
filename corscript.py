@@ -13,12 +13,4 @@ except IndexError:
         command = args.pop(0) # find command
         corutil.check_and_run_command(commands, command, args, vars) # check and run command
 
-try:
-    file = open(filein, "r")
-except FileNotFoundError:
-    print(f"The file {filein} does not exist. Did you type it correctly?")
-
-for line in file.read().splitlines():
-    if line:
-        command, args = line.split(" ")
-        corutil.check_and_run_command(commands, command, args, vars)
+corutil.open_file(commands, vars, filein)

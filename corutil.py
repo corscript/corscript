@@ -1,4 +1,24 @@
-def RunCommand(command, args, vars):
+def check_and_run_command(commands, command, args, vars):
+    '''
+    Checks command and runs it
+    '''
+    if command in commands:
+        RunCommand(command, args, vars, commands)  # run specified command
+    else:
+        print(
+            f"Error: command {command} does not exist. Did you type it correctly?")     
+def open_file(commands, vars, filein):
+    try:
+        file = open(filein, "r")
+    except FileNotFoundError:
+        print(f"The file {filein} does not exist. Did you type it correctly?")
+
+    for line in file.read().splitlines():
+        if line:
+            command, args = line.split(" ")
+            check_and_run_command(commands, command, args, vars)
+    file.close()       
+def RunCommand(command, args, vars, commands):
     '''
     Runs the specified corscript command with argument arg
     '''
@@ -12,12 +32,5 @@ def RunCommand(command, args, vars):
         vars[args[0]]= args[1] # Set variable arg1 to arg2
     elif command == "getin":
         vars[args[0]]= input(args[1]) # get input from user
-def check_and_run_command(commands, command, args, vars):
-    '''
-    Checks command and runs it
-    '''
-    if command in commands:
-        RunCommand(command, args, vars)  # run specified command
-    else:
-        print(
-            f"Error: command {command} does not exist. Did you type it correctly?")            
+    elif command == "load":
+        open_file(commands, vars, "~/.corscript/libs" + args[0] + ".cor")
