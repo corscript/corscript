@@ -7,7 +7,7 @@ args = []
 try:
     filein = sys.argv[1]  # Find filename
 except IndexError:
-    print("Corscript version 1.0.0 Shell")
+    print("Corscript version 1.1.1 Shell")
     while True:
         args = input("corscript>").split(" ") # get shell input
         command = args.pop(0) # find command
