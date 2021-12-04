@@ -1,3 +1,4 @@
+import subprocess
 def check_and_run_command(commands, command, args, vars):
     '''
     Checks command and runs it
@@ -34,3 +35,5 @@ def RunCommand(command, args, vars, commands):
         vars[args[0]]= input(args[1]) # get input from user
     elif command == "load":
         open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor")
+    elif command == "*":
+        print(subprocess.run(['python', '-c', args[0]], stdout=subprocess.PIPE).stdout.decode('utf-8'))
