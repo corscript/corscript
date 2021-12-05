@@ -16,7 +16,8 @@ def open_file(commands, vars, filein):
 
     for line in file.read().splitlines():
         if line:
-            command, args = line.split(" ")
+            args = line.split(" ")
+            command = args.pop(0)
             check_and_run_command(commands, command, args, vars)
     file.close()       
 def RunCommand(command, args, vars, commands):
