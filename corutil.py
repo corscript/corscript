@@ -9,6 +9,9 @@ def check_and_run_command(commands, command, args, vars):
         print(
             f"Error: command {command} does not exist. Did you type it correctly?")     
 def open_file(commands, vars, filein):
+    '''
+    Opens a file and runs it
+    '''
     try:
         file = open(filein, "r")
     except FileNotFoundError:
@@ -35,6 +38,7 @@ def RunCommand(command, args, vars, commands):
     elif command == "getin":
         vars[args[0]]= input(args[1]) # get input from user
     elif command == "load":
-        open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor")
+        open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor") # Load module
     elif command == "*":
-        print(subprocess.run(['python', '-c', args[0]], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+        print(subprocess.run(['python', '-c', args[0]], stdout=subprocess.PIPE).stdout.decode('utf-8')) # run python command
+        
