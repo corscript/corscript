@@ -28,7 +28,9 @@ def RunCommand(command, args, vars, commands):
     Runs the specified corscript command with argument arg
     '''
     if command == "print":
-        print(args[0]) # Print arg1
+        for arg in args:
+            print(arg, end=' ')
+        print()
     elif command == "var":
         vars[args[0]]= "" # Create variable arg1
     elif command == "printv":
