@@ -1,6 +1,6 @@
 import sys  # Used for arguments
 import corutil  # Used for utilities
-commands = ["print", "var", "printv", "setvar", "getin", "*"]  # Command list
+commands = ["print", "var", "printv", "setvar", "getin", "*", "ifequals"]  # Command list
 vars = {} # Variable list
 args = []
 

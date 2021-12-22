@@ -43,4 +43,10 @@ def RunCommand(command, args, vars, commands):
         open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor") # Load module
     elif command == "*":
         print(subprocess.run(['python', '-c', args[0]], stdout=subprocess.PIPE).stdout.decode('utf-8')) # run python command
+    elif command == "ifequals":
+        if vars[args[0]] == vars[args[1]]:
+            newargs = args.copy()
+            newargs.pop(0)
+            newargs.pop(1)
+            check_and_run_command(commands, args[2], newargs, vars)
         
