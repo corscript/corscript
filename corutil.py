@@ -1,18 +1,19 @@
 import subprocess
-def check_and_run_command(commands, command, args, vars):
+def check_and_run_command(commands, command, args, vars, fileargs):
     '''
     Checks command and runs it
     '''
     if command in commands:
-        RunCommand(command, args, vars, commands)  # run specified command
+        RunCommand(command, args, vars, commands, fileargs)  # run specified command
     else:
         print(
             f"Error: command {command} does not exist. Did you type it correctly?")     
-def open_file(commands, vars, filein):
+def open_file(commands, vars, filein, fileargs):
     '''
     Opens a file and runs it
     '''
     try:
+        global file
         file = open(filein, "r")
     except FileNotFoundError:
         print(f"The file {filein} does not exist. Did you type it correctly?")
@@ -21,9 +22,9 @@ def open_file(commands, vars, filein):
         if line:
             args = line.split(" ")
             command = args.pop(0)
-            check_and_run_command(commands, command, args, vars)
+            check_and_run_command(commands, command, args, vars, fileargs)
     file.close()       
-def RunCommand(command, args, vars, commands):
+def RunCommand(command, args, vars, commands, fileargs):
     '''
     Runs the specified corscript command with argument arg
     '''
@@ -40,7 +41,8 @@ def RunCommand(command, args, vars, commands):
     elif command == "getin":
         vars[args[0]]= input(args[1]) # get input from user
     elif command == "load":
-        open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor") # Load module
+        newargs = args.pop(0)
+        open_file(commands, vars, "~/.corscript/lib" + args[0] + ".cor", newargs) # Load module
     elif command == "*":
         print(subprocess.run(['python', '-c', args[0]], stdout=subprocess.PIPE).stdout.decode('utf-8')) # run python command
     elif command == "ifequals":
@@ -49,4 +51,6 @@ def RunCommand(command, args, vars, commands):
             newargs.pop(0)
             newargs.pop(1)
             check_and_run_command(commands, args[2], newargs, vars)
+    elif command == "getarg":
+        vars[args[1]]= fileargs[0]
         

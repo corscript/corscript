@@ -1,6 +1,6 @@
 import sys  # Used for arguments
 import corutil  # Used for utilities
-commands = ["print", "var", "printv", "setvar", "getin", "*", "ifequals"]  # Command list
+commands = ["print", "var", "printv", "setvar", "getin", "*", "ifequals", "getarg"]  # Command list
 vars = {} # Variable list
 args = []
 
@@ -11,6 +11,8 @@ except IndexError:
     while True:
         args = input("corscript>").split(" ") # get shell input
         command = args.pop(0) # find command
-        corutil.check_and_run_command(commands, command, args, vars) # check and run command
-
-corutil.open_file(commands, vars, filein)
+        corutil.check_and_run_command(commands, command, args, vars, []) # check and run command
+newargs = sys.argv.copy()
+newargs.pop(0)
+newargs.pop(0)
+corutil.open_file(commands, vars, filein, newargs)
