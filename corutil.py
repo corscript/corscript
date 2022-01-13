@@ -13,6 +13,7 @@ def open_file(commands, vars, filein, fileargs):
     Opens a file and runs it
     '''
     try:
+        global file
         file = open(filein, "r")
     except FileNotFoundError:
         print(f"The file {filein} does not exist. Did you type it correctly?")
